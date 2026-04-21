@@ -11,6 +11,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
+import VideoLearning from "./pages/VideoLearning";
+import Quiz from "./pages/Quiz";
 import Dashboard from "./pages/Dashboard";
 import { ManageCourses } from "./pages/dashboards/ManageCourses";
 import { CreateCourse } from "./pages/dashboards/CreateCourse";
