@@ -11,9 +11,12 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
-import VideoLearning from "./pages/VideoLearning";
-import Quiz from "./pages/Quiz";
 import Dashboard from "./pages/Dashboard";
+import { ManageCourses } from "./pages/dashboards/ManageCourses";
+import { CreateCourse } from "./pages/dashboards/CreateCourse";
+import { StudentStats } from "./pages/dashboards/StudentStats";
+import { MyCourses } from "./pages/dashboards/MyCourses";
+import { UserManagement } from "./pages/dashboards/UserManagement";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound.tsx";
 import { DashboardLayout } from "./components/DashboardLayout";
@@ -40,7 +43,16 @@ const App = () => (
               {/* Dashboard Routes with Sidebar Layout */}
               <Route path="/dashboard" element={<DashboardLayout />}>
                 <Route index element={<Dashboard />} />
-                {/* Placeholder for other dashboard sub-routes */}
+                {/* Instructor Routes */}
+                <Route path="manage" element={<ManageCourses />} />
+                <Route path="create" element={<CreateCourse />} />
+                <Route path="students" element={<StudentStats />} />
+                {/* Student Routes */}
+                <Route path="courses" element={<MyCourses />} />
+                {/* Admin Routes */}
+                <Route path="users" element={<UserManagement />} />
+                <Route path="courses-admin" element={<ManageCourses />} />
+                {/* Fallback for other dashboard sub-routes */}
                 <Route path="*" element={<Dashboard />} />
               </Route>
 
