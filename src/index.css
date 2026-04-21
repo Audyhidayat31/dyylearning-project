@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================================
+   Midnight Indigo — Design System
+   Semua warna HSL, semua token semantik
+   ================================ */
+@layer base {
+  :root {
+    --background: 240 40% 4%;            /* #0a0a1a */
+    --foreground: 230 25% 92%;
+
+    --card: 235 35% 9%;                  /* #141432 */
+    --card-foreground: 230 25% 92%;
+
+    --popover: 235 35% 9%;
+    --popover-foreground: 230 25% 92%;
+
+    --primary: 243 75% 59%;              /* indigo-600 */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 243 90% 70%;
+
+    --secondary: 240 30% 14%;            /* #1e1e5a-ish */
+    --secondary-foreground: 230 25% 92%;
+
+    --muted: 235 25% 14%;
+    --muted-foreground: 230 15% 65%;
+
+    --accent: 243 60% 22%;
+    --accent-foreground: 230 25% 95%;
+
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 152 70% 45%;
+    --warning: 38 92% 55%;
+
+    --border: 240 25% 18%;
+    --input: 240 25% 16%;
+    --ring: 243 75% 59%;
+
+    --radius: 0.85rem;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(243 75% 59%), hsl(263 75% 62%));
+    --gradient-hero: radial-gradient(ellipse at top, hsl(243 75% 59% / 0.35), transparent 60%),
+                     radial-gradient(ellipse at bottom right, hsl(263 75% 50% / 0.25), transparent 60%),
+                     hsl(240 40% 4%);
+    --gradient-card: linear-gradient(145deg, hsl(235 35% 11%), hsl(240 40% 7%));
+
+    /* Shadows */
+    --shadow-glow: 0 0 60px -10px hsl(243 90% 70% / 0.45);
+    --shadow-elegant: 0 20px 50px -20px hsl(243 80% 30% / 0.6);
+
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Sidebar */
+    --sidebar-background: 235 38% 7%;
+    --sidebar-foreground: 230 20% 80%;
+    --sidebar-primary: 243 75% 59%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 30% 14%;
+    --sidebar-accent-foreground: 230 25% 95%;
+    --sidebar-border: 240 25% 16%;
+    --sidebar-ring: 243 75% 59%;
+  }
+
+  .dark {
+    /* Sama dengan root — aplikasi default dark */
+    --background: 240 40% 4%;
+    --foreground: 230 25% 92%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { @apply dark; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+@layer utilities {
+  .bg-gradient-primary { background: var(--gradient-primary); }
+  .bg-gradient-hero    { background: var(--gradient-hero); }
+  .bg-gradient-card    { background: var(--gradient-card); }
+  .shadow-glow         { box-shadow: var(--shadow-glow); }
+  .shadow-elegant      { box-shadow: var(--shadow-elegant); }
+  .transition-smooth   { transition: var(--transition-smooth); }
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
