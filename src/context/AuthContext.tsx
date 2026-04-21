@@ -15,27 +15,27 @@ const USER_KEY = "dyylearning_user";
 const ALL_USERS_KEY = "dyylearning_all_users";
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [allUsers, setAllUsers] = useState<User[]>([]);
+  const [user, setUser] = useState<User | null>(() => {
+    const raw = localStorage.getItem(USER_KEY);
+    return raw ? JSON.parse(raw) : null;
+  });
 
-  useEffect(() => {
-    // Load current logged in user
-    const rawUser = localStorage.getItem(USER_KEY);
-    if (rawUser) setUser(JSON.parse(rawUser));
-
-    // Load all registered users, merge with demo users
+  const [allUsers, setAllUsers] = useState<User[]>(() => {
     const rawAll = localStorage.getItem(ALL_USERS_KEY);
+    const merged = [...DEMO_USERS];
     if (rawAll) {
       const stored: User[] = JSON.parse(rawAll);
-      // Merge stored users with DEMO_USERS (ensure no duplicates by email)
-      const merged = [...DEMO_USERS];
       stored.forEach(u => {
         if (!merged.find(m => m.email === u.email)) merged.push(u);
       });
-      setAllUsers(merged);
-    } else {
-      setAllUsers(DEMO_USERS);
     }
+    return merged;
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // Initial sync check if needed, but useState already handles first load
   }, []);
 
   const persistUser = (u: User | null) => {
