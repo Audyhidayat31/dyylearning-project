@@ -51,6 +51,17 @@ export const DashboardLayout = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
+  // Close mobile menu when switching to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     if (!user) navigate("/login");
   }, [user, navigate]);
