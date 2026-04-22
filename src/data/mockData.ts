@@ -47,9 +47,9 @@ export interface Quiz {
 
 // ============ DEMO USERS ============
 export const DEMO_USERS: User[] = [
-  { id: "u1", name: "Admin Demo",    email: "admin@gmail.com",   role: "ADMIN", password: "password123" },
+  { id: "u1", name: "Admin Demo", email: "admin@gmail.com", role: "ADMIN", password: "password123" },
   { id: "u2", name: "Budi Pengajar", email: "guru@gmail.com", role: "INSTRUCTOR", password: "password123" },
-  { id: "u3", name: "Siti Murid",    email: "siswa@gmail.com", role: "STUDENT", password: "password123" },
+  { id: "u3", name: "Siti Murid", email: "siswa@gmail.com", role: "STUDENT", password: "password123" },
 ];
 
 // ============ COURSES ============
@@ -65,10 +65,10 @@ export const COURSES: Course[] = [
     students: 1284,
     rating: 4.8,
     lessons: [
-      { id: "l1", title: "Pengenalan React",  type: "VIDEO", content: "https://www.youtube.com/embed/Tn6-PIqc4UM", duration: "12:34" },
-      { id: "l2", title: "JSX & Komponen",    type: "TEXT",  content: "JSX adalah ekstensi sintaks JavaScript yang memungkinkan kita menulis HTML di dalam JS. Setiap komponen React mengembalikan elemen JSX." },
+      { id: "l1", title: "Pengenalan React", type: "VIDEO", content: "https://www.youtube.com/embed/Tn6-PIqc4UM", duration: "12:34" },
+      { id: "l2", title: "JSX & Komponen", type: "TEXT", content: "JSX adalah ekstensi sintaks JavaScript yang memungkinkan kita menulis HTML di dalam JS. Setiap komponen React mengembalikan elemen JSX." },
       { id: "l3", title: "useState & useEffect", type: "VIDEO", content: "https://www.youtube.com/embed/O6P86uwfdR0", duration: "18:20" },
-      { id: "l4", title: "Cheatsheet Hooks",  type: "PDF",   content: "https://example.com/hooks.pdf" },
+      { id: "l4", title: "Cheatsheet Hooks", type: "PDF", content: "https://example.com/hooks.pdf" },
     ],
   },
   {

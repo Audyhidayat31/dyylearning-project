@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/Navbar";
-import { COURSES } from "@/data/mockData";
+import { useCourses } from "@/context/CourseContext";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -7,18 +7,19 @@ import { Link } from "react-router-dom";
 import { Search, Star, Users } from "lucide-react";
 import { useMemo, useState } from "react";
 
-const categories = ["Semua", "Web Development", "Backend", "Design", "Data Science"];
-
 export default function Courses() {
+  const { courses, categories: contextCategories } = useCourses();
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("Semua");
 
+  const categories = ["Semua", ...contextCategories];
+
   const filtered = useMemo(
-    () => COURSES.filter((c) =>
+    () => courses.filter((c) =>
       (cat === "Semua" || c.category === cat) &&
       c.title.toLowerCase().includes(q.toLowerCase())
     ),
-    [q, cat]
+    [q, cat, courses]
   );
 
   return (
@@ -63,8 +64,8 @@ export default function Courses() {
                   <h3 className="font-display text-lg font-semibold leading-tight">{c.title}</h3>
                   <p className="line-clamp-2 text-sm text-muted-foreground">{c.description}</p>
                   <div className="flex items-center justify-between pt-2 text-xs text-muted-foreground">
-                    <div className="flex items-center gap-1"><Star className="h-3.5 w-3.5 fill-warning text-warning" /> {c.rating}</div>
-                    <div className="flex items-center gap-1"><Users className="h-3.5 w-3.5" /> {c.students.toLocaleString()}</div>
+                    <div className="flex items-center gap-1"><Star className="h-3.5 w-3.5 fill-warning text-warning" /> {c.rating || 0}</div>
+                    <div className="flex items-center gap-1"><Users className="h-3.5 w-3.5" /> {(c.students || 0).toLocaleString()}</div>
                   </div>
                 </div>
               </Card>

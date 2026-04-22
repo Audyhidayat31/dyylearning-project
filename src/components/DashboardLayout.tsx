@@ -35,6 +35,7 @@ const linksByRole = {
   ADMIN: [
     { to: "/dashboard",         label: "Statistik",         icon: BarChart3, end: true },
     { to: "/dashboard/users",   label: "Manajemen User",    icon: Users },
+    { to: "/dashboard/categories", label: "Manajemen Kategori", icon: ClipboardList },
     { to: "/dashboard/courses-admin", label: "Manajemen Kursus", icon: BookOpen },
     { to: "/profile",           label: "Profil",            icon: UserIcon },
   ],

@@ -5,8 +5,11 @@ import { DEMO_USERS, User, Role } from "@/data/mockData";
 
 interface AuthContextType {
   user: User | null;
+  allUsers: User[];
   login: (email: string, password: string) => { ok: boolean; error?: string };
   register: (name: string, email: string, password: string, role: Role) => { ok: boolean; error?: string };
+  updateUser: (id: string, userData: Partial<User>) => void;
+  deleteUser: (id: string) => void;
   logout: () => void;
 }
 
@@ -32,12 +35,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return merged;
   });
 
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    // Initial sync check if needed, but useState already handles first load
-  }, []);
-
   const persistUser = (u: User | null) => {
     setUser(u);
     if (u) localStorage.setItem(USER_KEY, JSON.stringify(u));
@@ -46,7 +43,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const persistAllUsers = (users: User[]) => {
     setAllUsers(users);
-    // Filter out demo users before saving to localStorage to avoid redundancy
     const nonDemo = users.filter(u => !DEMO_USERS.find(d => d.email === u.email));
     localStorage.setItem(ALL_USERS_KEY, JSON.stringify(nonDemo));
   };
@@ -55,12 +51,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const found = allUsers.find((u) => u.email === email);
     if (!found) return { ok: false, error: "Email tidak terdaftar" };
     
-    // Check password
     if (found.password && password !== found.password) {
       return { ok: false, error: "Password salah" };
     }
     
-    // For demo users that might not have password in allUsers yet (fallback)
     if (!found.password && password !== "password123") {
       return { ok: false, error: "Password salah (gunakan: password123)" };
     }
@@ -76,13 +70,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const u: User = { id: `u${Date.now()}`, name, email, role, password };
     const newUsers = [...allUsers, u];
     persistAllUsers(newUsers);
-    persistUser(u);
     return { ok: true };
+  };
+
+  const updateUser = (id: string, userData: Partial<User>) => {
+    const updated = allUsers.map(u => u.id === id ? { ...u, ...userData } : u);
+    persistAllUsers(updated);
+    if (user?.id === id) {
+      persistUser({ ...user, ...userData } as User);
+    }
+  };
+
+  const deleteUser = (id: string) => {
+    if (id === user?.id) return;
+    persistAllUsers(allUsers.filter(u => u.id !== id));
   };
 
   const logout = () => persistUser(null);
 
-  return <AuthContext.Provider value={{ user, login, register, logout }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user, allUsers, login, register, updateUser, deleteUser, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export function useAuth() {
