@@ -92,7 +92,7 @@ export const COURSES: Course[] = [
     description: "Prinsip desain modern: hirarki visual, tipografi, warna, dan interaksi.",
     category: "Design",
     level: "Beginner",
-    thumbnail: "https://images.unsplash.com/photo-1561070791-2526d30994b8?w=800",
+    thumbnail: "https://s3-alpha.figma.com/hub/file/2942566861/7e3aaade-4be8-47a8-aa6c-fe6f0c220316-cover.png",
     instructor: "Budi Pengajar",
     students: 2150,
     rating: 4.9,
